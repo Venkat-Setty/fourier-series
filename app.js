@@ -24,8 +24,8 @@
    
      sine_y0 = y;
      sine_x1 = sine_x0 + 0.2;
-     sine_x0 += 0.2;
-     sine_y1 = center_y + radius * Math.sin(-(angle + 0.2) * Math.PI / 180);
+     sine_x0 += 0.17;
+     sine_y1 = center_y + radius * Math.sin(-(angle + 0.3) * Math.PI / 180);
      ctx.beginPath();
      ctx.arc(x, y, point_size, 0, 2 * Math.PI);
      ctx.fillStyle = "#ff0000";
@@ -57,7 +57,7 @@
      drawCircle();
      drawPoint(Angle);
      drawSine();
-     Angle += 0.2;
+     Angle += 0.4;
      window.requestAnimationFrame(draw);
  }
  draw();

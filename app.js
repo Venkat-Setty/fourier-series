@@ -21,7 +21,7 @@
  function drawPoint(angle) {
      var x = center_x + radius * Math.cos(-angle * Math.PI / 180);
      var y = center_y + radius * Math.sin(-angle * Math.PI / 180);
-   
+
      sine_y0 = y;
      sine_x1 = sine_x0 + 0.2;
      sine_x0 += 0.17;
@@ -53,12 +53,20 @@
  var Angle = 0;
 
  function draw() {
-     ctx.clearRect(0, 0, 200, 500);
+     if (sine_x1 > 900 && sine_y1 <= center_y) {
+         sine_x0 = 200;
+         sine_y0 = center_y;
+         ctx.clearRect(0, 0, 1000, 500);
+     } else {
+         ctx.clearRect(0, 0, 200, 500);
+     }
+
      drawCircle();
      drawPoint(Angle);
      drawSine();
      Angle += 0.4;
-     window.requestAnimationFrame(draw);
+     setInterval(window.requestAnimationFrame(draw), 1);
+
  }
  draw();
  //window.requestAnimationFrame(draw);

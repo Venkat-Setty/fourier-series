@@ -7,6 +7,7 @@
  var sine_y0;
  var sine_y1;
  var offset = 100;
+var loop =0;
 
 
  var c = window.document.getElementById("myCanvas");
@@ -23,9 +24,8 @@
      var y = center_y + radius * Math.sin(-angle * Math.PI / 180);
 
      sine_y0 = y;
-     sine_x1 = sine_x0 + 0.2;
-     sine_x0 += 0.17;
-     sine_y1 = center_y + radius * Math.sin(-(angle + 0.3) * Math.PI / 180);
+     sine_x1 = sine_x0 + 6;
+     sine_y1 = center_y + radius * Math.sin(-(angle + 6) * Math.PI / 180);
      ctx.beginPath();
      ctx.arc(x, y, point_size, 0, 2 * Math.PI);
      ctx.fillStyle = "#ff0000";
@@ -42,9 +42,13 @@
 
  function drawSine() {
      ctx.beginPath();
-     ctx.moveTo(sine_x0, sine_y0);
-     ctx.lineTo(sine_x1, sine_y1);
+     ctx.moveTo(sine_x1, sine_y1);
+     ctx.lineTo(sine_x0, sine_y0);
+     console.log("1s ==>  "+ sine_x1+" , "+ sine_y1);
+     console.log("0s ==>  "+ sine_x0+", "+sine_y0);
      ctx.stroke();
+     sine_x0 = sine_x1;
+     sine_y0 = sine_y1;
 
  }
 
@@ -53,6 +57,10 @@
  var Angle = 0;
 
  function draw() {
+     if(center_x ==100 && loop<2){
+         loop++;
+         console.log("date "+Date.now()+ "   X=>  "+center_x);
+     }
      if (sine_x1 > 900 && sine_y1 <= center_y) {
          sine_x0 = 200;
          sine_y0 = center_y;
@@ -64,8 +72,8 @@
      drawCircle();
      drawPoint(Angle);
      drawSine();
-     Angle += 0.4;
-     setInterval(window.requestAnimationFrame(draw), 1);
+     Angle += 6;
+     window.requestAnimationFrame(draw)
 
  }
  draw();
